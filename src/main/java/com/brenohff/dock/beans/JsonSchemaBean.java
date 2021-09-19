@@ -20,7 +20,7 @@ public class JsonSchemaBean {
 
     @Bean
     public Schema getJsonSchema() {
-        try (InputStream inputStream = getClass().getResourceAsStream("/schema.json")) {
+        try (InputStream inputStream = getClass().getResourceAsStream("/terminal.json")) {
             JSONObject rawSchema = new JSONObject(new JSONTokener(inputStream));
 
             return SchemaLoader.load(rawSchema);
