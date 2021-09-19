@@ -9,6 +9,4 @@ import java.util.Optional;
 @Repository
 public interface TerminalRepository extends JpaRepository<TerminalEntity, Integer> {
 
-    Optional<TerminalEntity> getTerminalEntityByLogic(int logic);
-
 }

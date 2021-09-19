@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import static com.brenohff.dock.consts.DockConstants.*;
-import static com.brenohff.dock.consts.DockConstants.JSON_OBJECT_INDEX_VERFM;
 
 @Configuration
 public class JsonSchemaBean {
@@ -52,16 +51,12 @@ public class JsonSchemaBean {
         }
     }
 
-    public JSONObject validateJson(String payload) {
-        JSONObject jsonObject = parseStringToJSONObject(payload);
-
+    public void validateJson(JSONObject jsonObject) {
         try {
             getJsonSchema().validate(jsonObject);
         } catch (ValidationException e) {
             throw new JsonValidationException(e.getMessage());
         }
-
-        return jsonObject;
     }
 
 }
