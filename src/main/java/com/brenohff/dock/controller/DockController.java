@@ -17,8 +17,8 @@ public class DockController {
     private DockService dockService;
 
     @PostMapping(consumes = MediaType.TEXT_HTML_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> register(@RequestBody String body) {
-        dockService.register(body);
+    public ResponseEntity<Void> register(@RequestBody String payload) {
+        dockService.register(payload);
 
         return ResponseEntity.ok().build();
     }
