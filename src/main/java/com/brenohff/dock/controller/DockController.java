@@ -1,5 +1,6 @@
 package com.brenohff.dock.controller;
 
+import com.brenohff.dock.entity.TerminalEntity;
 import com.brenohff.dock.service.DockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -17,10 +18,8 @@ public class DockController {
     private DockService dockService;
 
     @PostMapping(consumes = MediaType.TEXT_HTML_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> register(@RequestBody String payload) {
-        dockService.register(payload);
-
-        return ResponseEntity.ok().build();
+    public ResponseEntity<TerminalEntity> register(@RequestBody String payload) {
+        return ResponseEntity.ok().body(dockService.register(payload));
     }
 
 }
