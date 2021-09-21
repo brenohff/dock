@@ -9,18 +9,18 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.springframework.context.annotation.Configuration;
 
-import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 
 @Configuration
 public class JsonSchemaBean {
 
     public Schema getJsonSchema(String schema) {
         try (InputStream inputStream = getClass().getResourceAsStream(schema)) {
-            JSONObject rawSchema = new JSONObject(new JSONTokener(inputStream));
+            JSONObject rawSchema = new JSONObject(new JSONTokener(Objects.requireNonNull(inputStream)));
 
             return SchemaLoader.load(rawSchema);
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new SchemaNotFoundException("Could not locate schema with name: " + schema);
         }
     }

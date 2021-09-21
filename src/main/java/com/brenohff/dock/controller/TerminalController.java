@@ -24,7 +24,7 @@ public class TerminalController {
         return ResponseEntity.ok().body(dockService.findTerminalsByLogic(logic));
     }
 
-    @PutMapping(name = "/{logic}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(path = "/{logic}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TerminalEntity> updateTerminal(@PathVariable("logic") int logic, @RequestBody TerminalEntity terminal) {
         return ResponseEntity.ok().body(dockService.updateTerminal(logic, terminal));
     }

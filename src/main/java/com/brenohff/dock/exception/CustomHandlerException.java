@@ -3,6 +3,7 @@ package com.brenohff.dock.exception;
 import com.brenohff.dock.dto.ErrorDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -33,6 +34,11 @@ public class CustomHandlerException {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorDTO> methodNotAllowed(HttpRequestMethodNotSupportedException e) {
         return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(generateError(HttpStatus.METHOD_NOT_ALLOWED, e.getLocalizedMessage()));
+    }
+
+    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+    public ResponseEntity<ErrorDTO> unsuportedMediaType(HttpMediaTypeNotSupportedException e) {
+        return ResponseEntity.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE).body(generateError(HttpStatus.UNSUPPORTED_MEDIA_TYPE, e.getLocalizedMessage()));
     }
 
     private ErrorDTO generateError(HttpStatus status, String error) {
