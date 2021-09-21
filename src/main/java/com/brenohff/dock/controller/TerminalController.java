@@ -7,6 +7,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+
 @RestController()
 @RequestMapping("/v1/terminal")
 public class TerminalController {
@@ -16,7 +18,8 @@ public class TerminalController {
 
     @PostMapping(consumes = MediaType.TEXT_HTML_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TerminalEntity> register(@RequestBody String payload) {
-        return ResponseEntity.ok().body(dockService.register(payload));
+        TerminalEntity terminal = dockService.register(payload);
+        return ResponseEntity.created(URI.create("/v1/terminal/" + terminal.getLogic())).body(terminal);
     }
 
     @GetMapping("/{logic}")
