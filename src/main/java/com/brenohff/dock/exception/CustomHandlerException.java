@@ -3,6 +3,7 @@ package com.brenohff.dock.exception;
 import com.brenohff.dock.dto.ErrorDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -27,6 +28,11 @@ public class CustomHandlerException {
     @ExceptionHandler(SchemaNotFoundException.class)
     public ResponseEntity<ErrorDTO> schemaNotFoundException(SchemaNotFoundException e) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(generateError(HttpStatus.INTERNAL_SERVER_ERROR, e.getLocalizedMessage()));
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorDTO> methodNotAllowed(HttpRequestMethodNotSupportedException e) {
+        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(generateError(HttpStatus.METHOD_NOT_ALLOWED, e.getLocalizedMessage()));
     }
 
     private ErrorDTO generateError(HttpStatus status, String error) {
