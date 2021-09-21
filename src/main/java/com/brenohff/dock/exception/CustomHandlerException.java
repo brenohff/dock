@@ -14,14 +14,19 @@ public class CustomHandlerException {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(generateError(HttpStatus.BAD_REQUEST, e.getLocalizedMessage().replace("#: ", "")));
     }
 
-    @ExceptionHandler(ObjectNotFound.class)
-    public ResponseEntity<ErrorDTO> objectNotFound(ObjectNotFound e) {
+    @ExceptionHandler(ObjectNotFoundException.class)
+    public ResponseEntity<ErrorDTO> objectNotFound(ObjectNotFoundException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(generateError(HttpStatus.NOT_FOUND, e.getLocalizedMessage()));
     }
 
     @ExceptionHandler(DuplicatedTerminalException.class)
     public ResponseEntity<ErrorDTO> duplicatedTerminalException(DuplicatedTerminalException e) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(generateError(HttpStatus.CONFLICT, e.getLocalizedMessage()));
+    }
+
+    @ExceptionHandler(SchemaNotFoundException.class)
+    public ResponseEntity<ErrorDTO> schemaNotFoundException(SchemaNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(generateError(HttpStatus.INTERNAL_SERVER_ERROR, e.getLocalizedMessage()));
     }
 
     private ErrorDTO generateError(HttpStatus status, String error) {

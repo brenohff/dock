@@ -24,4 +24,6 @@ public class DockConstants {
     public static final int JSON_OBJECT_INDEX_VERFM = 9;
 
     public static final String SPLIT_DELIMITER = ";";
+
+    public static final String TERMINAL_SCHEMA = "/terminal.json";
 }
